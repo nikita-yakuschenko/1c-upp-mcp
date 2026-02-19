@@ -41,22 +41,23 @@ chmod +x start.sh && chmod +x stop.sh
 1. Запустить сервисы: `./start.sh`
 2. Выгрузить структуру конфигурации из 1С через обработку `ПолучитьТекстСтруктурыКонфигурацииФайлами.epf`
 3. Открыть Loader (порт 8501), загрузить ZIP с markdown и `objects.csv`, нажать «Начать обработку»
-4. Подключить MCP в Cursor/IDE (URL: `http://<хост>:8000/mcp`)
+4. Подключить MCP в Cursor/IDE — в URL указать **хост или домен** (например при размещении на домене: `https://mcp.module.team/mcp`, локально: `http://localhost:8000/mcp`).
 
 **Подключение в Cursor** (`.cursor/mcp.json`):
 
 ```json
 {
   "servers": {
-    "my-1c-mcp-server": {
-      "headers": { "x-collection-name": "my_vector_collection" },
-      "url": "http://<хост>:8000/mcp"
+    "1c-upp-mcp-server": {
+      "headers": { "x-collection-name": "имя_коллекции_в_qdrant" },
+      "url": "https://<хост или домен>/mcp"
     }
   }
 }
 ```
 
-Заголовок `x-collection-name` задаёт имя коллекции в Qdrant (по умолчанию `1c_rag`).
+- **url** — хост или домен MCP-сервера (при домене без порта: `https://mcp.example.com/mcp`; локально: `http://localhost:8000/mcp`).
+- **x-collection-name** — имя коллекции в Qdrant (по умолчанию `1c_rag`).
 
 ## Развёртывание на Dokploy
 
