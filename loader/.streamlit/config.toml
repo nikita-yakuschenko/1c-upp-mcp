@@ -1,0 +1,8 @@
+# Настройки для работы Loader за reverse proxy (Traefik/Dokploy).
+# Без этого при доступе по домену (например loader.module.team) возможны 403 или сбои загрузки.
+
+[server]
+port = 8501
+address = "0.0.0.0"
+enableCORS = false
+enableXsrfProtection = false

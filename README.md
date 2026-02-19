@@ -28,13 +28,28 @@ chmod +x start.sh && chmod +x stop.sh
 
 ## Доступные сервисы
 
-| Сервис        | URL (локально)              |
-|---------------|-----------------------------|
-| Loader        | http://localhost:8501       |
-| Embedding API | http://localhost:5000        |
+**Локально** (docker-compose на своей машине):
+
+| Сервис        | URL |
+|---------------|-----|
+| Loader        | http://localhost:8501 |
+| Embedding API | http://localhost:5000 |
 | Qdrant        | http://localhost:6333/dashboard |
-| MCP Server    | http://localhost:8000/mcp   |
-| MCP Inspector | http://localhost:6274       |
+| MCP Server    | http://localhost:8000/mcp |
+| MCP Inspector | http://localhost:6274 |
+
+**На домене** (например после деплоя на Dokploy с доменом `module.team`):
+
+| Сервис        | URL |
+|---------------|-----|
+| Loader        | https://loader.module.team |
+| Qdrant        | https://qdrant.module.team/dashboard |
+| MCP Server    | https://mcp.module.team/mcp |
+| MCP Inspector | https://inspector.module.team |
+
+Чтобы Qdrant не перенаправлял дашборд на localhost, в переменных окружения задайте `QDRANT_WEB_UI_PUBLIC_URL=https://qdrant.module.team` (или ваш домен Qdrant). В Dokploy — вкладка **Environment** у приложения.
+
+**Если по домену 404 (loader, qdrant и т.д.):** в Dokploy для каждого сервиса нужно добавить домен во вкладке **Domains** (Add Domain → выбрать сервис → указать поддомен, например `loader.module.team` для сервиса `loader`). Без этого Traefik не знает, куда вести запросы.
 
 ## Как пользоваться
 

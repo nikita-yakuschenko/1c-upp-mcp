@@ -13,6 +13,8 @@ services:
       - ./qdrant_storage:/qdrant/storage
     environment:
       - QDRANT__CLUSTER__ENABLED=false
+      # При доступе по домену задать, например: QDRANT_WEB_UI_PUBLIC_URL=https://qdrant.module.team
+      - QDRANT__WEB_UI__PUBLIC_URL=${QDRANT_WEB_UI_PUBLIC_URL:-}
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://qdrant:6333/healthz" ]
       interval: 10s
